@@ -1,0 +1,30 @@
+{
+  "name": "extropy",
+  "version": "0.0.0",
+  "description": "CLI tool for working with the extropy store",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/extr0py/extropy-cli.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/extr0py/extropy-cli/issues"
+  },
+  "homepage": "https://github.com/extr0py/extropy-cli",
+  "preferGlobal": true,
+  "bin": {
+    "extropy": "build/extropy.js"
+  },
+  "dependencies": {
+    "yargs": "^3.16.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-header": "^1.2.2",
+    "gulp-typescript": "^2.8.0"
+  }
+}
