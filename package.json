@@ -17,9 +17,11 @@
   "homepage": "https://github.com/extr0py/extropy-cli",
   "preferGlobal": true,
   "bin": {
-    "extropy": "build/extropy.js"
+    "extropy": "build/cli/extropy-cli.js"
   },
   "dependencies": {
+    "express": "^4.13.3",
+    "find-parent-dir": "^0.3.0",
     "yargs": "^3.16.1"
   },
   "devDependencies": {
