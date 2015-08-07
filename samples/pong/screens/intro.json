@@ -1,0 +1,11 @@
+{
+    "name": "Title Screen",
+    "resolution": "800x600",
+    "entities": {
+        "titleScreenEntity": {
+            "components": {
+                "HtmlView": "<div>Hello World</div>"
+            }
+        }
+    }
+}
