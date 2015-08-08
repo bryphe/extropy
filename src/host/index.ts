@@ -20,6 +20,9 @@ module Extropy {
             var hostClientFilesPath = path.join(__dirname, "../client");
             app.use(express.static(hostClientFilesPath));
 
+            var scriptFilesPath = path.join(__dirname, "../core");
+            app.use(express.static(scriptFilesPath));
+
             var server = app.listen(3000, () => {
                 var host = server.address().address;
                 var port = server.address().port;
