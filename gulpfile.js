@@ -29,6 +29,17 @@ gulp.task("build-host", function () {
 gulp.task("build-client-html", function () {
     return gulp.src(["src/client/**/*.html"])
             .pipe(gulp.dest("build/client"));
-})
+});
 
-gulp.task("default", ["build-cli", "build-host", "build-client-html"]);
+gulp.task("build-core-common", function () {
+        var tsResult = gulp.src(["src/core/common/**/*.ts", "typings/q/Q.d.ts"])
+            .pipe(ts({
+                    noExternalResolve: true,
+                    out: "extropy.common.js",
+                    target: "ES5"
+            }));
+
+        return tsResult.js.pipe(gulp.dest("build/core/common"));
+});
+
+gulp.task("default", ["build-cli", "build-host", "build-client-html", "build-core-common"]);
