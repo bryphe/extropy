@@ -39,6 +39,6 @@ function play(yargs): void {
 
 function startGame(workingDirectory: string, pathToGameJson: string[]) {
     console.log("Trying to start game.");
-    var hostServer = new extropy.GameHostServer();
+    var hostServer = new extropy.GameHostServer(workingDirectory);
 
 }

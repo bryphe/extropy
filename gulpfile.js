@@ -26,4 +26,9 @@ gulp.task("build-host", function () {
         .pipe(gulp.dest("build/host"))
 });
 
-gulp.task("default", ["build-cli", "build-host"]);
+gulp.task("build-client-html", function () {
+    return gulp.src(["src/client/**/*.html"])
+            .pipe(gulp.dest("build/client"));
+})
+
+gulp.task("default", ["build-cli", "build-host", "build-client-html"]);
