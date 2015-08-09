@@ -1,5 +1,4 @@
 ﻿/// <reference path="../_references.ts" />
-/// <reference path="../_references.ts" />
 
 module Extropy {
     export interface IAssetManager extends IDisposable {

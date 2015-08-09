@@ -3,9 +3,19 @@ var header = require("gulp-header");
 var ts = require("gulp-typescript");
 var merge = require("merge2");
 var del = require("del");
+var less = require("gulp-less");
+var autoprefixplugin = require("less-plugin-autoprefix");
+var autoprefixoptions = {browsers: ["last 2 versions"]};
+var autoprefix = new autoprefixplugin(autoprefixoptions);
 
 gulp.task("clean", function (cb) {
     del(["build/**"], cb);
+});
+
+gulp.task("build:client-css", function () {
+    gulp.src("src/client/**/*.less")
+        .pipe(less({ plugins: [autoprefix] }))
+        .pipe(gulp.dest("build/client/css"));
 });
 
 gulp.task("build:cli", function () {
@@ -61,4 +71,4 @@ gulp.task("build:core-client", ["build:core-common"], function () {
     return tsResult.js.pipe(gulp.dest("build/js"));
 });
 
-gulp.task("default", ["build:cli", "build:host", "build:client-html", "build:core-common", "build:core-client"]);
+gulp.task("default", ["build:cli", "build:host", "build:client-css", "build:client-html", "build:core-common", "build:core-client"]);
