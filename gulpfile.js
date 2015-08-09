@@ -1,7 +1,7 @@
 var gulp = require("gulp");
 var header = require("gulp-header");
 var ts = require("gulp-typescript");
-
+var merge = require("merge2");
 
 gulp.task("build-cli", function () {
     var tsResult = gulp.src(["src/cli/**/*.ts", "typings/node/node.d.ts"])
@@ -36,10 +36,24 @@ gulp.task("build-core-common", function () {
             .pipe(ts({
                     noExternalResolve: true,
                     out: "extropy.common.js",
+                    target: "ES5",
+                    declarationFiles: true
+            }));
+
+        return merge([
+                tsResult.js.pipe(gulp.dest("build/core/common")),
+                tsResult.dts.pipe(gulp.dest("build/core/common"))]);
+});
+
+gulp.task("build-core-client", ["build-core-common"], function () {
+        var tsResult = gulp.src(["src/core/client/**/*.ts", "typings/q/Q.d.ts", "build/core/common/extropy.common.d.ts"])
+            .pipe(ts({
+                    noExternalResolve: true,
+                    out: "extropy.client.js",
                     target: "ES5"
             }));
 
-        return tsResult.js.pipe(gulp.dest("build/core/common"));
+        return tsResult.js.pipe(gulp.dest("build/core/client"));
 });
 
-gulp.task("default", ["build-cli", "build-host", "build-client-html", "build-core-common"]);
+gulp.task("default", ["build-cli", "build-host", "build-client-html", "build-core-common", "build-core-client"]);
