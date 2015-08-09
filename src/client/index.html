@@ -5,8 +5,13 @@
     <title></title>
     <script src="extropy.common.js"></script>
     <script src="extropy.client.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/extropy.css" />
 </head>
 <body>
     <div id="game-host"></div>
+    <script>
+        var gamePlayer = new Extropy.Player(document.getElementById("game-host"));
+        gamePlayer.startGameFromJson("game.json");
+    </script>
 </body>
 </html>
