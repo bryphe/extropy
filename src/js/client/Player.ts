@@ -25,6 +25,7 @@ module Extropy {
 
         public startGameFromJson(gameJsonPath: string) {
             alert("Trying to start game");
+            // var serverGamePackage = new ServerGamePackage(gameJsonPath);
             // var gamePackage = GamePackage.create(gameJsonPath);
             // gamePackage.load()
             //     .then((gameModel: IGameModel) => {
