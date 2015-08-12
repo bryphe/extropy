@@ -3,21 +3,9 @@
 /// <reference path="Screens/DefaultScreenManager" />
 /// <reference path="GameRunner.ts" />
 /// <reference path="Model/IGameModel.ts" />
+/// <reference path="ServerGamePackage.ts" />
 
 module Extropy {
-    export class ServerGamePackage {
-        constructor() {
-        
-        }
-
-        public load(): Q.Promise<Model.IGameModel> {
-            var promise = Q.defer<Model.IGameModel>();
-            xhr("get", "game.json", function(data){
-                alert("data");
-            });
-            return promise.promise;
-        }
-    }
     export class Player {
         private _parentElement: HTMLElement;
 
