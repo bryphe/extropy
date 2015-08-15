@@ -1,15 +1,33 @@
-var xhr = function() {
-    var xhr = new XMLHttpRequest();
-    return function( method, url, callback ) {
-        xhr.onreadystatechange = function() {
-            if ( xhr.readyState === 4 ) {
-                callback( xhr.responseText );
-            }
-        };
-        xhr.open( method, url );
-        xhr.send();
-    };
-}();
+/// <reference path="_references.ts" />
+
+function xhr(url: string): Q.Promise<string> {
+    var request = new XMLHttpRequest();
+    var deferred = Q.defer<string>();
+
+    request.open("GET", url, true);
+    request.onload = onload;
+    request.onerror = onerror;
+    request.onprogress = onprogress;
+    request.send();
+
+    function onload() {
+        if (request.status === 200) {
+            deferred.resolve(request.responseText);
+        } else {
+            deferred.reject(new Error("Status code was " + request.status));
+        }
+    }
+
+    function onerror() {
+        deferred.reject(new Error("Can't XHR " + JSON.stringify(url)));
+    }
+
+    function onprogress(event) {
+        deferred.notify(event.loaded / event.total);
+    }
+
+    return deferred.promise;
+}
 /*
 xhr('get', 'http://google.com', function(data) {
     console.log(data);

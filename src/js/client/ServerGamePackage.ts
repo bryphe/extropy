@@ -11,11 +11,8 @@ module Extropy {
         }
 
         public load(): Q.Promise<Model.IGameModel> {
-            var promise = Q.defer<Model.IGameModel>();
-            xhr("get", "game.json", function(data){
-                alert("data");
-            });
-            return promise.promise;
+            return xhr("game.json")
+                .then((data) => Model.GameModel.parse(data));
         }
     }
 }

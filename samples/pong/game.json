@@ -1,6 +1,6 @@
 {
     "name": "Pong",
-    "startScreen": "screens\intro.json",
+    "startScreen": "screens/intro.json",
     "client": {
         "dependencies": {
             "extropy-html": "0.0.1",
@@ -8,9 +8,9 @@
             "extropy-physjs": "0.0.1"
         },
         "screens": [
-            "screens\intro.json"
+            "screens/intro.json"
         ],
-        "assets": ["assets\**\*.*"]
+        "assets": ["assets/**/*.*"]
     }
 }
 
