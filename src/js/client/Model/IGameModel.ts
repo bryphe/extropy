@@ -6,4 +6,11 @@ module Extropy.Model {
         initialScreen: IScreenModel;
         screens: IScreenModel[];
     }
+
+    export class GameModel {
+    
+        public static parse(json: string): IGameModel {
+            return null;
+        }
+    }
 }
