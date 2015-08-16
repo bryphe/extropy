@@ -1,15 +1,15 @@
 {
     "name": "Pong",
-    "startScreen": "screens/intro.json",
     "client": {
+        "startScreen": "screens/intro.json",
+        "screens": [
+            "screens/intro.json"
+        ],
         "dependencies": {
             "extropy-html": "0.0.1",
             "extropy-pixijs": "0.0.1",
             "extropy-physjs": "0.0.1"
         },
-        "screens": [
-            "screens/intro.json"
-        ],
         "assets": ["assets/**/*.*"]
     }
 }

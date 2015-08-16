@@ -15,8 +15,6 @@ module Extropy {
 
         private _unscaledElement: HTMLElement;
 
-        private _viewBox: any;
-
         constructor(width: number, height: number, parentElement: HTMLElement) {
 
             var element = document.createElement("div");
@@ -37,9 +35,6 @@ module Extropy {
 
             parentElement.appendChild(this._unscaledElement);
 
-
-            this._viewBox = new ViewBox(outerElement);
-
             window.addEventListener("resize",() => {
                 this._updateSizes();
             });
@@ -48,8 +43,6 @@ module Extropy {
         }
 
         private _updateSizes(): void {
-            this._viewBox.forceLayout();
-
             var clientRect = this.element.getBoundingClientRect();
 
             this._unscaledElement.style.top = clientRect.top + "px";

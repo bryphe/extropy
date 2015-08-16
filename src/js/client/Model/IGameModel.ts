@@ -8,10 +8,12 @@ module Extropy.Model {
     }
 
     export interface IGameJsonDefinition {
-
         name: string;
-        startScreen: string;
+        client: IGameClientJsonDefinition;
+    }
 
+    export interface IGameClientJsonDefinition {
+        startScreen: string;
         screens: string[];
     }
 
@@ -32,19 +34,36 @@ module Extropy.Model {
             var gameModel = new GameModel();
             var data = <IGameJsonDefinition>JSON.parse(json);
 
-            return GameModel._parseScreens(data)
+            // TODO: Make sure 'client' is defined.
+            // TODO: Make sure 'screens' / 'startScreen' is defineded
+            
+            var screens = data.client.screens;
+            var initialScreen = data.client.startScreen;
+
+            return GameModel._parseScreens(data.client)
                     .then((screenModelManager: ScreenModelManager) => {
                                 gameModel._screens = screenModelManager.screens;
-                                gameModel._initialScreen = screenModelManager.getScreenByName(data.startScreen);
+                                gameModel._initialScreen = screenModelManager.getScreenByName(initialScreen);
                             })
                     .then(() => gameModel);
             // ret.screens = GameModel._parseScreens(data);
 
         }
 
-        private static _parseScreens(data: IGameJsonDefinition): Q.Promise<ScreenModelManager> {
-            var ret = new ScreenModelManager();
-            return Q.when(ret);
+        private static _parseScreens(data: IGameClientJsonDefinition): Q.Promise<ScreenModelManager> {
+            var ret = <any>Q.when();
+            var screenModelManager = new ScreenModelManager();
+
+            var allScreensLoaded = Q.when();
+            data.screens.forEach((screenUrl: string) => {
+                var screenLoadedPromise = xhr(screenUrl)
+                                        .then((screenData) => ScreenModel.parse(JSON.parse(screenData)) 
+                                        .then((screen: IScreenModel) => screenModelManager.addScreen(screenUrl, screen)));
+
+                ret = Q.all([ret, screenLoadedPromise]);
+            });
+
+            return ret.then(() => screenModelManager);
         }
     }
 
