@@ -11,5 +11,6 @@ module Extropy.Entity {
     export interface IComponentDefinition {
         name: string;
 
+        // TODO: Add key/value properties
     }
 }

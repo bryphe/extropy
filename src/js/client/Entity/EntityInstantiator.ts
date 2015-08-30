@@ -1,5 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 /// <reference path="EntityManager.ts" />
+/// <reference path="../Model/IEntityModel.ts" />
 
 module Extropy {
 
@@ -83,7 +84,7 @@ module Extropy {
                 var component = createFromConstructorFunction<Extropy.Entity.Component>(componentModel.constructorFunction);
 
                 for (var propName in componentModel.properties) {
-                    var propValue = componentModel.properties[propName].value;
+                    var propValue = componentModel.properties[propName];
                     component[propName] = propValue;
                 }
 
