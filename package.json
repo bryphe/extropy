@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "CLI tool for working with the extropy store",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha --reporter spec"
   },
   "repository": {
     "type": "git",
